@@ -50,13 +50,13 @@ private val menuItems = listOf(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun BottomAppBar() {
+fun BottomAppBar(modifier: Modifier = Modifier, onMenuItemClicked: (String) -> Unit = {}) {
 
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val sliderWidth = (screenWidth / 4).dp
     var slideTo by remember { mutableIntStateOf(0) }
 
-    Column {
+    Column(modifier) {
 
         Slider(sliderWidth, slideTo)
 
@@ -69,9 +69,12 @@ fun BottomAppBar() {
             repeat(menuItems.size) {
                 MenuItem(menuItems[it].imageId, menuItems[it].title) {
                     slideTo = getPositionToSlideTo(sliderWidth.value.toInt(), screenWidth, it)
+                    onMenuItemClicked(menuItems[it].route)
                 }
             }
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 

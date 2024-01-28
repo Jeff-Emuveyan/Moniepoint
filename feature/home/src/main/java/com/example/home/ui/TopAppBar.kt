@@ -38,7 +38,7 @@ import com.example.home.R
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun TopAppBar(modifier: Modifier = Modifier) {
-    Box(modifier = Modifier.wrapContentSize()) {
+    Box(modifier = modifier.wrapContentSize()) {
         Column(
             modifier = Modifier
                 .background(colorResource(id = R.color.light_blue))

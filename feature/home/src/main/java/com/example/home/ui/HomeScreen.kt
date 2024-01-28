@@ -34,14 +34,36 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.home.R
 import com.example.home.ui.BottomAppBar
 
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomeScreen() {
-    Column(modifier = Modifier.fillMaxSize()) {
-        TopAppBar()
-        MainContent()
-        BottomAppBar()
+fun HomeScreen(onMenuItemClicked: (String) -> Unit = {}) {
+    ConstraintLayout {
+        val (topAppBar, middle, bottomAppBar) = createRefs()
+
+        val topModifier = Modifier.constrainAs(topAppBar) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+
+        val middleModifier = Modifier.constrainAs(middle) {
+            top.linkTo(topAppBar.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+
+        val bottomModifier = Modifier.constrainAs(bottomAppBar) {
+            bottom.linkTo(parent.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }
+
+        TopAppBar(topModifier)
+        MainContent(middleModifier)
+        BottomAppBar(bottomModifier, onMenuItemClicked)
     }
 }
