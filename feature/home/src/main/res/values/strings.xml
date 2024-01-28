@@ -25,5 +25,23 @@
     <string name="this_amount">This amount is estimated to vary if you\nchange your location or weight</string>
     <string name="back_home">Back to home</string>
     <string name="search_text">Enter the receipt number …</string>
+    <string name="vehicle_title_1">Ocean freight</string>
+    <string name="vehicle_title_2">Cargo freight</string>
+    <string name="vehicle_title_3">Air freight</string>
 
+    <string name="vehicle_desc_1">International</string>
+    <string name="vehicle_desc_2">Reliable</string>
+
+    <string name="shipment_number">Shipment Number</string>
+    <string name="number">NEJ000909090903234</string>
+    <string name="available_vehicles">Available vehicles</string>
+    <string name="tracking">Tracking</string>
+    <string name="sender">Sender</string>
+    <string name="sender_address">Atlanta, 5243</string>
+    <string name="time">Time</string>
+    <string name="time_value">2 day - 3 days</string>
+    <string name="receiver">Receiver</string>
+    <string name="status">Status</string>
+    <string name="your_location">Your location</string>
+    <string name="your_location_address">Wertheimer, Illinois</string>
 </resources>

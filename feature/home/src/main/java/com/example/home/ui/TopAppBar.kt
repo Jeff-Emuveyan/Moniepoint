@@ -46,9 +46,7 @@ fun TopAppBar(modifier: Modifier = Modifier) {
                 .padding(16.dp)
         ) {
             UserInfoSection()
-
             Spacer(Modifier.height(20.dp))
-
             SearchSection()
         }
     }
@@ -62,7 +60,7 @@ private fun UserInfoSection() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
@@ -75,13 +73,20 @@ private fun UserInfoSection() {
             Spacer(modifier = Modifier.width(16.dp))
 
             Column {
-                Text(
-                    text = "Your location",
-                    color = Color.White
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(Modifier.size(4.dp).clip(CircleShape).background(Color.White))
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        style = MaterialTheme.typography.bodyMedium,
+                        text = stringResource(id = R.string.your_location),
+                        color = Color.White
+                    )
+                }
+                Spacer(modifier = Modifier.height(4.dp))
                 Row {
                     Text(
-                        text = "Wertheimer, Illinois",
+                        style = MaterialTheme.typography.bodyMedium,
+                        text = stringResource(id = R.string.your_location_address),
                         color = Color.White
                     )
                     Image(
