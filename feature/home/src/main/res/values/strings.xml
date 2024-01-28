@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Moniepoint</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="calculate">Calculate</string>
+    <string name="complete">Complete</string>
+    <string name="shipment">Shipment</string>
+    <string name="destination">Destination</string>
+    <string name="sender_location">Sender Location</string>
+    <string name="receiver_location">Receiver Location</string>
+    <string name="approx_weight">Approx Weight</string>
+    <string name="text_packaging">Packaging</string>
+    <string name="question">What are you sending?</string>
+    <string name="box">Box</string>
+    <string name="categories">Categories</string>
+
+    <string name="documents">Documents</string>
+    <string name="glass">Glass</string>
+    <string name="liquid">Liquid</string>
+    <string name="food">Food</string>
+    <string name="electronic">Electronic</string>
+    <string name="product">Product</string>
+    <string name="others">Others</string>
+    <string name="total">Total Estimated Amount</string>
+    <string name="this_amount">This amount is estimated to vary if you\nchange your location or weight</string>
+    <string name="back_home">Back to home</string>
+    <string name="search_text">Enter the receipt number …</string>
+
+</resources>

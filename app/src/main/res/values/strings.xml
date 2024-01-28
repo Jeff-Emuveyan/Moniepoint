@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Moniepoint</string>
+    <string name="home">Home</string>
+    <string name="calculate">Calculate</string>
+    <string name="shipment">Shipment</string>
+    <string name="complete">Complete</string>
+</resources>
