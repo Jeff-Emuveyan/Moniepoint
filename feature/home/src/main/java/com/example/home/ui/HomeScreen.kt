@@ -104,7 +104,6 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             SavedItemsList(middleModifier)
         }
 
-
         if (!showSearchResultsOnly) {
             AnimatedVisibility(visible = showAnimations, modifier = middleModifier) { MainContent(middleModifier) }
 
