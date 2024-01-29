@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Moniepoint</string>
     <string name="home">Home</string>
+    <string name="_title">Dot</string>
     <string name="calculate">Calculate</string>
     <string name="shipment">Shipment</string>
     <string name="destination">Destination</string>

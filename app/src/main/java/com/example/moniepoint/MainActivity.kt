@@ -49,9 +49,11 @@ private fun AppScreen(navController: NavHostController) {
         composable(Screen.Home.route) { HomeScreen {
             if (it.isNotEmpty()) { navController.navigate(it) }
         } }
-        composable(Screen.Calculate.route) { CalculateScreen {
-            navController.navigate(Screen.Complete.route)
-        } }
+
+        composable(Screen.Calculate.route) {
+            CalculateScreen( { navController.navigate(Screen.Complete.route) }, { navController.popBackStack() })
+        }
+
         composable(Screen.Shipment.route) { ShipmentScreen() }
         composable(Screen.Complete.route) { CompleteScreen {
             navController.navigate(Screen.Home.route)

@@ -6,6 +6,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,16 +59,41 @@ import com.example.common.latoFontFamily
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun CalculateScreen(onClick: () -> Unit = {}) {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxHeight()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        MainContent()
-        CalculateButton(onClick)
+fun CalculateScreen(onClick: () -> Unit = {}, onBackPressed: () -> Unit = {}) {
+    Column {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(colorResource(id = R.color.light_blue))
+                .padding(16.dp)
+        ) {
+            Image(
+                modifier = Modifier.clickable(onClick = onBackPressed),
+                painter = painterResource(id = R.drawable.arrow_back),
+                contentDescription = ""
+            )
+            Text(
+                color = colorResource(id = R.color.white),
+                text = stringResource(id = R.string.calculate),
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = stringResource(id = R.string._title),
+                color = colorResource(id = R.color.light_blue)
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxHeight()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            MainContent()
+            CalculateButton(onClick)
+        }
     }
 }
 
@@ -290,7 +316,9 @@ private fun Category(@StringRes text: Int = R.string.categories) {
 @Composable
 private fun CalculateButton(onClick: () -> Unit = {}) {
     Button(
-        modifier = Modifier.fillMaxWidth().bounceClick(onClick),
+        modifier = Modifier
+            .fillMaxWidth()
+            .bounceClick(onClick),
         contentPadding = PaddingValues(all = 14.dp),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.orange)),
