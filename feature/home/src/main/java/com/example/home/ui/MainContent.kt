@@ -139,13 +139,13 @@ private fun Sender() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
                 modifier = Modifier.size(32.dp),
                 painter = painterResource(id = R.drawable.compass),
                 contentDescription = ""
             )
-
+            Spacer(modifier = Modifier.width(4.dp))
             Column {
                 Text(
                     color = colorResource(id = R.color.brown),
@@ -191,13 +191,13 @@ private fun Receiver() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
                 modifier = Modifier.size(32.dp),
                 painter = painterResource(id = R.drawable.compass),
                 contentDescription = ""
             )
-
+            Spacer(modifier = Modifier.width(4.dp))
             Column {
                 Text(
                     color = colorResource(id = R.color.brown),

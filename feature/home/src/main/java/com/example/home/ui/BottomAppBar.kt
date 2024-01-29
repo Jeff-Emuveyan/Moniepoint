@@ -109,15 +109,21 @@ private fun MenuItem(@DrawableRes imageId: Int = R.drawable.home,
                      @StringRes title: Int = R.string.home,
                      onClick: () -> Unit = {}
 ) {
+    var hasBeenSelected by remember { mutableStateOf(false) }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.clickable(onClick = onClick)
+        modifier = Modifier.clickable{
+            hasBeenSelected = !hasBeenSelected
+            onClick()
+        }
     ) {
         Image(painter = painterResource(id = imageId), contentDescription = "")
 
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
+            color = if (hasBeenSelected) colorResource(id = R.color.light_blue) else colorResource(id = R.color.default_ash),
             fontSize = 12.sp,
             text = stringResource(id = title)
         )

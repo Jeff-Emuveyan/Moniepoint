@@ -6,5 +6,5 @@ import androidx.compose.runtime.Composable
 @Composable
 fun ShipmentScreen() {
 
-    Text(text = "Shipment")
+    Text(text = "Work in progress...")
 }

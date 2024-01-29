@@ -8,4 +8,5 @@
     <color name="orange_dark">#CA7800</color>
     <color name="white">#FFFFFF</color>
     <color name="green">#4CAF50</color>
+    <color name="default_ash">#939393</color>
 </resources>
