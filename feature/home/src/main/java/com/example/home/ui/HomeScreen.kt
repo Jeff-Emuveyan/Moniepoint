@@ -84,6 +84,7 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             end.linkTo(parent.end)
         }
 
+        // Animation: Slide downwards vertically
         AnimatedVisibility(
             visible = showAnimations,
             modifier = topModifier,
@@ -102,6 +103,8 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
 
         if (!showSearchResultsOnly) {
             AnimatedVisibility(visible = showAnimations, modifier = middleModifier) { MainContent(middleModifier) }
+
+            // Animation: Slide upwards vertically
             AnimatedVisibility(
                 visible = showAnimations,
                 modifier = bottomModifier,
