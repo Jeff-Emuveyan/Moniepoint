@@ -45,6 +45,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.example.home.R
 import com.example.home.ui.BottomAppBar
 
@@ -64,7 +65,7 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
     }
 
     ConstraintLayout {
-        val (topAppBar, middle, bottomAppBar) = createRefs()
+        val (topAppBar, middleSection, bottomAppBar) = createRefs()
 
         val topModifier = Modifier.constrainAs(topAppBar) {
             top.linkTo(parent.top)
@@ -72,10 +73,12 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             end.linkTo(parent.end)
         }
 
-        val middleModifier = Modifier.constrainAs(middle) {
+        val middleModifier = Modifier.constrainAs(middleSection) {
             top.linkTo(topAppBar.bottom)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
+            bottom.linkTo(bottomAppBar.top)
+            height = Dimension.fillToConstraints
         }
 
         val bottomModifier = Modifier.constrainAs(bottomAppBar) {
