@@ -1,8 +1,10 @@
 package com.example.home.ui
 
 import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
@@ -32,6 +35,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,7 +45,10 @@ import com.example.home.R
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun TopAppBar(modifier: Modifier = Modifier, onReadyToSearch:(Boolean) -> Unit = {}) {
+fun TopAppBar(modifier: Modifier = Modifier,
+              showSearchResultsOnly: Boolean = false,
+              onReadyToSearch:(Boolean) -> Unit = {}
+) {
     Box(modifier = modifier.wrapContentSize()) {
         Column(
             modifier = Modifier
@@ -51,7 +58,7 @@ fun TopAppBar(modifier: Modifier = Modifier, onReadyToSearch:(Boolean) -> Unit =
         ) {
             UserInfoSection()
             Spacer(Modifier.height(20.dp))
-            SearchSection(onReadyToSearch)
+            SearchSection(showSearchResultsOnly, onReadyToSearch)
         }
     }
 }
@@ -78,7 +85,11 @@ private fun UserInfoSection() {
 
             Column {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(Modifier.size(4.dp).clip(CircleShape).background(Color.White))
+                    Box(
+                        Modifier
+                            .size(4.dp)
+                            .clip(CircleShape)
+                            .background(Color.White))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         style = MaterialTheme.typography.bodyMedium,
@@ -114,59 +125,72 @@ private fun UserInfoSection() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun SearchSection(onReadyToSearch:(Boolean) -> Unit = {}) {
-    Row(
-        modifier = Modifier
-            .clip(RoundedCornerShape(50.dp))
-            .background(colorResource(id = R.color.very_light_brown))
-            .fillMaxWidth()
-            .padding(start = 16.dp, top = 6.dp, bottom = 6.dp, end = 6.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row {
+private fun SearchSection(showSearchResultsOnly: Boolean = false,
+                          onReadyToSearch:(Boolean) -> Unit = {}) {
+    Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+
+        AnimatedVisibility(visible = showSearchResultsOnly) {
             Image(
-                modifier = Modifier.size(16.dp),
-                painter = painterResource(R.drawable.magnifying),
-                contentDescription = ""
-            )
-
-            Spacer(Modifier.width(16.dp))
-
-            val text = remember { mutableStateOf("") }
-            BasicTextField(
-                modifier = Modifier.focusRequester(FocusRequester.Default)
-                    .onFocusChanged {  onReadyToSearch(it.isFocused)  },
-                value = text.value,
-                onValueChange = {
-                    text.value = it
-                },
-                decorationBox = { innerTextField ->
-                    Box {
-                        if (text.value.isEmpty()) {
-                            Text(
-                                text = stringResource(R.string.search_text),
-                                color = colorResource(id = R.color.brown),
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        }
-                        innerTextField()
-                    }
-                }
+                modifier = Modifier.padding(horizontal = 8.dp).clickable { onReadyToSearch(false) },
+                painter = painterResource(id = R.drawable.arrow_back), contentDescription = ""
             )
         }
 
-        Image(
-            contentScale = ContentScale.FillBounds,
+        Row(
             modifier = Modifier
-                .clip(CircleShape)
-                .background(colorResource(id = R.color.orange))
-                .size(32.dp)
-                .padding(6.dp),
-            painter = painterResource(id = R.drawable.card),
-            contentDescription = ""
-        )
+                .clip(RoundedCornerShape(50.dp))
+                .background(colorResource(id = R.color.very_light_brown))
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 6.dp, bottom = 6.dp, end = 6.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row {
+                Image(
+                    modifier = Modifier.size(16.dp),
+                    painter = painterResource(R.drawable.magnifying),
+                    contentDescription = ""
+                )
+
+                Spacer(Modifier.width(16.dp))
+
+                val text = remember { mutableStateOf("") }
+                BasicTextField(
+                    modifier = Modifier
+                        .focusRequester(FocusRequester.Default)
+                        .onFocusChanged { onReadyToSearch(it.isFocused) },
+                    value = text.value,
+                    onValueChange = {
+                        text.value = it
+                    },
+                    decorationBox = { innerTextField ->
+                        Box {
+                            if (text.value.isEmpty()) {
+                                Text(
+                                    text = stringResource(R.string.search_text),
+                                    color = colorResource(id = R.color.brown),
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                            innerTextField()
+                        }
+                    }
+                )
+            }
+
+            Image(
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(colorResource(id = R.color.orange))
+                    .size(32.dp)
+                    .padding(6.dp),
+                painter = painterResource(id = R.drawable.card),
+                contentDescription = ""
+            )
+        }
     }
 }

@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -43,6 +44,10 @@ import com.example.home.ui.BottomAppBar
 fun HomeScreen(showSearchResultsOnly: Boolean = false,
                onMenuItemClicked: (String) -> Unit = {},
                onReadyToSearch:(Boolean) -> Unit = {}) {
+
+    if (!showSearchResultsOnly) {
+        LocalFocusManager.current.clearFocus(true)
+    }
 
     ConstraintLayout {
         val (topAppBar, middle, bottomAppBar) = createRefs()
@@ -65,7 +70,7 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             end.linkTo(parent.end)
         }
 
-        TopAppBar(topModifier, onReadyToSearch)
+        TopAppBar(topModifier, showSearchResultsOnly, onReadyToSearch)
         if (showSearchResultsOnly) {
             SavedItemsList(middleModifier)
         } else {
