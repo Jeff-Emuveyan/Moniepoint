@@ -94,12 +94,16 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             TopAppBar(topModifier, showSearchResultsOnly, onReadyToSearch)
         }
 
-        AnimatedVisibility(visible = showSearchResultsOnly, modifier = middleModifier, enter = slideInVertically {
-                with(300) { 940 }
-            } + expandVertically(expandFrom = Alignment.Bottom) + fadeIn(initialAlpha = 0.3f)
+        AnimatedVisibility(
+            visible = showSearchResultsOnly,
+            modifier = middleModifier,
+            enter = slideInVertically (initialOffsetY = { it },
+                animationSpec = tween(durationMillis = 300, easing = LinearEasing)
+            )
         ) {
             SavedItemsList(middleModifier)
         }
+
 
         if (!showSearchResultsOnly) {
             AnimatedVisibility(visible = showAnimations, modifier = middleModifier) { MainContent(middleModifier) }
@@ -108,7 +112,7 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             AnimatedVisibility(
                 visible = showAnimations,
                 modifier = bottomModifier,
-                enter = slideInVertically (initialOffsetY = { it / 2 },
+                enter = slideInVertically (initialOffsetY = { it },
                 animationSpec = tween(durationMillis = 500, easing = LinearEasing)
                 )
             ) {
