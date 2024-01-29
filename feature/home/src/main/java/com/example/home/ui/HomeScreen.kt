@@ -1,5 +1,9 @@
 package com.example.home.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -71,9 +75,15 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
         }
 
         TopAppBar(topModifier, showSearchResultsOnly, onReadyToSearch)
-        if (showSearchResultsOnly) {
+
+        AnimatedVisibility(visible = showSearchResultsOnly, modifier = middleModifier, enter = slideInVertically {
+                with(300) { 940 }
+            } + expandVertically(expandFrom = Alignment.Bottom) + fadeIn(initialAlpha = 0.3f)
+        ) {
             SavedItemsList(middleModifier)
-        } else {
+        }
+
+        if (!showSearchResultsOnly) {
             MainContent(middleModifier)
             BottomAppBar(bottomModifier, onMenuItemClicked)
         }
