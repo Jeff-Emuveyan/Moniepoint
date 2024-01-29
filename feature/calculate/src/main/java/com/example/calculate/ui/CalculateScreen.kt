@@ -2,6 +2,11 @@ package com.example.calculate.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,6 +42,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -261,6 +267,10 @@ private fun PackagingBox() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun Categories() {
+    var showAnimations by remember { mutableStateOf(false) }
+
+    SideEffect { showAnimations = true }
+
     val categories = arrayOf(
         R.string.documents,
         R.string.glass,
@@ -271,10 +281,21 @@ private fun Categories() {
         R.string.others
     )
 
-    FlowRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(1.dp)) {
-        repeat(7) { Category(categories[it]) }
+    AnimatedVisibility(
+        visible = showAnimations,
+        enter = slideInHorizontally(
+            initialOffsetX = { 300 }, // small slide 300px
+            animationSpec = tween(
+                durationMillis = 300,
+                easing = LinearEasing // interpolator
+            )
+        )
+    ) {
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(1.dp)) {
+            repeat(7) { Category(categories[it]) }
+        }
     }
 }
 
