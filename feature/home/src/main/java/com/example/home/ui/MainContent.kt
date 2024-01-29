@@ -2,6 +2,10 @@ package com.example.home.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -25,6 +29,11 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -260,6 +269,9 @@ private fun SubCard(@StringRes title: Int = R.string.vehicle_title_1,
                     @StringRes description: Int = R.string.vehicle_desc_1,
                     @DrawableRes image: Int = R.drawable.f) {
 
+    var showAnimations by remember { mutableStateOf(false) }
+    SideEffect { showAnimations = true }
+
     ElevatedCard(
         elevation = CardDefaults.cardElevation(defaultElevation = .5.dp)
     ) {
@@ -279,11 +291,23 @@ private fun SubCard(@StringRes title: Int = R.string.vehicle_title_1,
                 text = stringResource(id = description)
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Image(
-                modifier = Modifier.size(130.dp, 150.dp),
-                painter = painterResource(id = image),
-                contentDescription = ""
-            )
+
+            AnimatedVisibility(
+                visible = showAnimations,
+                enter = slideInHorizontally(
+                    initialOffsetX = { 300 }, // small slide 300px
+                    animationSpec = tween(
+                        durationMillis = 500,
+                        easing = LinearEasing // interpolator
+                    )
+                )
+            ) {
+                Image(
+                    modifier = Modifier.size(130.dp, 150.dp),
+                    painter = painterResource(id = image),
+                    contentDescription = ""
+                )
+            }
         }
     }
 
