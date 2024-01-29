@@ -249,8 +249,8 @@ private fun SubCards() {
             .fillMaxWidth()
     ) {
         SubCard()
-        SubCard(R.string.vehicle_title_2, R.string.vehicle_desc_2, R.drawable.ff)
-        SubCard(R.string.vehicle_title_3, R.string.vehicle_desc_2, R.drawable.fff)
+        SubCard(R.string.vehicle_title_2, R.string.vehicle_desc_2, R.drawable.fff)
+        SubCard(R.string.vehicle_title_3, R.string.vehicle_desc_2, R.drawable.ff)
     }
 }
 
