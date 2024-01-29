@@ -8,6 +8,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -44,11 +48,15 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppScreen(navController: NavHostController) {
+    var showSearchResultsOnly by remember { mutableStateOf(false) }
 
     NavHost(navController, startDestination = Screen.Home.route) {
-        composable(Screen.Home.route) { HomeScreen {
+        composable(Screen.Home.route) { HomeScreen (showSearchResultsOnly, {
             if (it.isNotEmpty()) { navController.navigate(it) }
-        } }
+            }, {
+                    showSearchResultsOnly = it
+             })
+        }
 
         composable(Screen.Calculate.route) {
             CalculateScreen( { navController.navigate(Screen.Complete.route) }, { navController.popBackStack() })

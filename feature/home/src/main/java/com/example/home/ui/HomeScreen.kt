@@ -40,7 +40,10 @@ import com.example.home.ui.BottomAppBar
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomeScreen(onMenuItemClicked: (String) -> Unit = {}) {
+fun HomeScreen(showSearchResultsOnly: Boolean = false,
+               onMenuItemClicked: (String) -> Unit = {},
+               onReadyToSearch:(Boolean) -> Unit = {}) {
+
     ConstraintLayout {
         val (topAppBar, middle, bottomAppBar) = createRefs()
 
@@ -62,8 +65,12 @@ fun HomeScreen(onMenuItemClicked: (String) -> Unit = {}) {
             end.linkTo(parent.end)
         }
 
-        TopAppBar(topModifier)
-        MainContent(middleModifier)
-        BottomAppBar(bottomModifier, onMenuItemClicked)
+        TopAppBar(topModifier, onReadyToSearch)
+        if (showSearchResultsOnly) {
+            SavedItemsList(middleModifier)
+        } else {
+            MainContent(middleModifier)
+            BottomAppBar(bottomModifier, onMenuItemClicked)
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.home.ui
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -37,7 +41,7 @@ import com.example.home.R
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun TopAppBar(modifier: Modifier = Modifier) {
+fun TopAppBar(modifier: Modifier = Modifier, onReadyToSearch:(Boolean) -> Unit = {}) {
     Box(modifier = modifier.wrapContentSize()) {
         Column(
             modifier = Modifier
@@ -47,7 +51,7 @@ fun TopAppBar(modifier: Modifier = Modifier) {
         ) {
             UserInfoSection()
             Spacer(Modifier.height(20.dp))
-            SearchSection()
+            SearchSection(onReadyToSearch)
         }
     }
 }
@@ -112,7 +116,7 @@ private fun UserInfoSection() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun SearchSection() {
+private fun SearchSection(onReadyToSearch:(Boolean) -> Unit = {}) {
     Row(
         modifier = Modifier
             .clip(RoundedCornerShape(50.dp))
@@ -133,6 +137,8 @@ private fun SearchSection() {
 
             val text = remember { mutableStateOf("") }
             BasicTextField(
+                modifier = Modifier.focusRequester(FocusRequester.Default)
+                    .onFocusChanged {  onReadyToSearch(it.isFocused)  },
                 value = text.value,
                 onValueChange = {
                     text.value = it
