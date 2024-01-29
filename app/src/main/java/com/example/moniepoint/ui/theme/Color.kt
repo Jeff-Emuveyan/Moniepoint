@@ -10,4 +10,4 @@ val Purple40 = Color(0xFF8D56F3)
 val PurpleGrey40 = Color(0xFF8D56F3)
 val Pink40 = Color(0xFF8D56F3)
 
-val NotificationTrayColor = Color(0xFF8D56F3)
+val NotificationTrayColor = Color(0xFF435097)
