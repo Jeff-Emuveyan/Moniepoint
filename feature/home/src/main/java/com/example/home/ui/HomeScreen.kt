@@ -1,6 +1,8 @@
 package com.example.home.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
@@ -82,7 +84,14 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             end.linkTo(parent.end)
         }
 
-        TopAppBar(topModifier, showSearchResultsOnly, onReadyToSearch)
+        AnimatedVisibility(
+            visible = showAnimations,
+            modifier = topModifier,
+            enter = slideInVertically (initialOffsetY = { -it },
+            animationSpec = tween(durationMillis = 500, easing = LinearEasing))
+        ) {
+            TopAppBar(topModifier, showSearchResultsOnly, onReadyToSearch)
+        }
 
         AnimatedVisibility(visible = showSearchResultsOnly, modifier = middleModifier, enter = slideInVertically {
                 with(300) { 940 }
@@ -92,12 +101,13 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
         }
 
         if (!showSearchResultsOnly) {
-            AnimatedVisibility(visible = showAnimations, modifier = middleModifier) {
-                MainContent(middleModifier)
-            }
+            AnimatedVisibility(visible = showAnimations, modifier = middleModifier) { MainContent(middleModifier) }
             AnimatedVisibility(
                 visible = showAnimations,
-                modifier = bottomModifier
+                modifier = bottomModifier,
+                enter = slideInVertically (initialOffsetY = { it / 2 },
+                animationSpec = tween(durationMillis = 500, easing = LinearEasing)
+                )
             ) {
                 BottomAppBar(bottomModifier, onMenuItemClicked)
             }
