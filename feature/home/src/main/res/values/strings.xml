@@ -33,7 +33,8 @@
     <string name="vehicle_desc_2">Reliable</string>
 
     <string name="shipment_number">Shipment Number</string>
-    <string name="number">NEJ000909090903234</string>
+    <string name="number">NEJ0009090909032621</string>
+    <string name="number_">#NEJ0009090909</string>
     <string name="available_vehicles">Available vehicles</string>
     <string name="tracking">Tracking</string>
     <string name="sender">Sender</string>
@@ -44,4 +45,16 @@
     <string name="status">Status</string>
     <string name="your_location">Your location</string>
     <string name="your_location_address">Wertheimer, Illinois</string>
+
+    <string name="title_1">Summer linen jacket</string>
+    <string name="title_2">Tapered-fit jeans AW</string>
+    <string name="title_3">Macbook Pro M2</string>
+    <string name="title_4">Office setup desk</string>
+
+    <string name="paris">Paris</string>
+    <string name="lagos">Lagos</string>
+    <string name="berlin">Berlin</string>
+    <string name="abuja">Abuja</string>
+    <string name="rome">Rome</string>
+
 </resources>
