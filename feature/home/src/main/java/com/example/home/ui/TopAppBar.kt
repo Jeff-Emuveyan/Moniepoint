@@ -56,7 +56,9 @@ fun TopAppBar(modifier: Modifier = Modifier,
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            UserInfoSection()
+            AnimatedVisibility(visible = !showSearchResultsOnly, modifier = modifier) {
+                UserInfoSection()
+            }
             Spacer(Modifier.height(20.dp))
             SearchSection(showSearchResultsOnly, onReadyToSearch)
         }
@@ -134,7 +136,9 @@ private fun SearchSection(showSearchResultsOnly: Boolean = false,
 
         AnimatedVisibility(visible = showSearchResultsOnly) {
             Image(
-                modifier = Modifier.padding(horizontal = 8.dp).clickable { onReadyToSearch(false) },
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .clickable { onReadyToSearch(false) },
                 painter = painterResource(id = R.drawable.arrow_back), contentDescription = ""
             )
         }
