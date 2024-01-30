@@ -132,7 +132,10 @@ private fun NavigationItem(
             Spacer(modifier = Modifier.width(4.dp))
             Box(modifier = Modifier
                 .clip(RoundedCornerShape(12.dp))
-                .background(colorResource(id = R.color.orange_dark))
+                .background(
+                    if (isSelected) colorResource(id = R.color.orange_dark)
+                    else colorResource(id = R.color.light_blue_pale)
+                )
                 .padding(horizontal = 8.dp, vertical = .5.dp)) {
                 Text(
                     style = MaterialTheme.typography.bodyMedium,
