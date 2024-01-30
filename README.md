@@ -1,4 +1,4 @@
-# Moniepoint
+# Moniepoint Translation Test
 
 *Ensure you have the latest version of Android studio (Android Studio Hedgehog | 2023.1 preferrably) before cloning this repository.*
 
