@@ -7,4 +7,10 @@
     <string name="progress">In progress</string>
     <string name="pending">Pending Order</string>
     <string name="cancelled">Cancelled</string>
+    <string name="arriving_today">Arriving Today!</string>
+    <string name="message">Your delivery, #NEJ68957487535898\nfrom Atlanta, is arriving today.</string>
+    <string name="dollar">$650 USD</string>
+    <string name="date">Sep 20, 2023</string>
+    <string name="_pending">pending</string>
+    <string name="shipments">Shipments</string>
 </resources>

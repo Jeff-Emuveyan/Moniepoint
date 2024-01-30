@@ -7,8 +7,10 @@
     <color name="brown">#BDBDBD</color>
     <color name="orange">#FF9800</color>
     <color name="orange_dark">#CA7800</color>
+    <color name="orange_dull">#F6CF96</color>
     <color name="white">#FFFFFF</color>
     <color name="white_dull">#E6E6E6</color>
+    <color name="off_white">#F3F3F3</color>
     <color name="green">#4CAF50</color>
     <color name="default_ash">#939393</color>
     <color name="purple_200">#FFBB86FC</color>
