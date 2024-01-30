@@ -22,7 +22,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -79,6 +82,7 @@ private fun Header(onBackPressed: () -> Unit = {}) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun Navigation() {
+    var positionOfSelectedMenuItem by remember { mutableStateOf(0) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -87,15 +91,30 @@ private fun Navigation() {
             .padding(vertical = 0.dp, horizontal = 8.dp)
     ) {
         repeat(5) {
-            NavigationItem(title = menuItems[it].first, number = menuItems[it].second)
+            NavigationItem(
+                it,
+                positionOfSelectedMenuItem,
+                title = menuItems[it].first,
+                numberText = menuItems[it].second
+            ) {
+                positionOfSelectedMenuItem = it
+            }
         }
     }
 }
 
 @Composable
-private fun NavigationItem(@StringRes title: Int, number: Int) {
-
+private fun NavigationItem(
+    positionOnMenu: Int,
+    positionOfSelectedMenuItem: Int,
+    @StringRes title: Int,
+    numberText: Int,
+    onClicked: (position: Int) -> Unit
+) {
     Column(
+        modifier = Modifier.clickable {
+               onClicked(positionOnMenu)
+        },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
@@ -114,15 +133,20 @@ private fun NavigationItem(@StringRes title: Int, number: Int) {
                 .padding(horizontal = 8.dp, vertical = .5.dp)) {
                 Text(
                     style = MaterialTheme.typography.bodyMedium,
-                    text = number.toString(),
+                    text = numberText.toString(),
                     color = colorResource(id = R.color.white)
                 )
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
+
+        val isSelected = positionOnMenu == positionOfSelectedMenuItem
         Box(
             modifier = Modifier
-                .background(colorResource(id = R.color.orange_dark))
+                .background(
+                    if (isSelected) colorResource(id = R.color.orange_dark)
+                    else colorResource(id = R.color.light_blue)
+                )
                 .size(60.dp, 4.dp)
         )
     }
