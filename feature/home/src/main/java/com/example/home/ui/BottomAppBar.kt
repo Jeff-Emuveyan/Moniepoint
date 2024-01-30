@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -123,6 +124,7 @@ private fun MenuItem(@DrawableRes imageId: Int = R.drawable.home,
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
+            modifier = Modifier.testTag(stringResource(id = title)),
             color = if (hasBeenSelected) colorResource(id = R.color.light_blue) else colorResource(id = R.color.default_ash),
             fontSize = 12.sp,
             text = stringResource(id = title)
