@@ -97,6 +97,7 @@ fun HomeScreen(showSearchResultsOnly: Boolean = false,
             TopAppBar(topModifier, showSearchResultsOnly, onReadyToSearch)
         }
 
+        // Animation: Slide upwards vertically
         AnimatedVisibility(
             visible = showSearchResultsOnly,
             modifier = middleModifier,
