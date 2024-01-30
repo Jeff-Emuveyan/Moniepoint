@@ -111,6 +111,8 @@ private fun NavigationItem(
     numberText: Int,
     onClicked: (position: Int) -> Unit
 ) {
+    val isSelected = positionOnMenu == positionOfSelectedMenuItem
+
     Column(
         modifier = Modifier.clickable {
                onClicked(positionOnMenu)
@@ -123,7 +125,8 @@ private fun NavigationItem(
         ) {
             Text(
                 style = MaterialTheme.typography.bodyMedium,
-                color = colorResource(id = R.color.white_dull),
+                color = if (isSelected) colorResource(id = R.color.white)
+                        else colorResource(id = R.color.white_dull),
                 text = stringResource(id = title)
             )
             Spacer(modifier = Modifier.width(4.dp))
@@ -139,8 +142,6 @@ private fun NavigationItem(
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
-
-        val isSelected = positionOnMenu == positionOfSelectedMenuItem
         Box(
             modifier = Modifier
                 .background(
