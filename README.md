@@ -2,7 +2,9 @@
 
 *Ensure you have the latest version of Android studio (Android Studio Hedgehog | 2023.1 preferrably) before cloning this repository.*
 
-This is a parcel track delivery android application.
+This is a parcel track delivery android app gotten from this design: https://dribbble.com/shots/21617837-Movemate-Shipments-Mobile-App
+
+Animations in the design have been implemented.
 
 <p float="left">
   <img src="https://firebasestorage.googleapis.com/v0/b/memo-24031.appspot.com/o/Screenshot_20240130_110237_Moniepoint.jpg?alt=media&token=ad74a2eb-d5d7-4c40-b98f-ac02b33a66da" width="300" height="650" />
