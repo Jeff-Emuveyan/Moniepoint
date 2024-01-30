@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Moniepoint</string>
+    <string name="_title">Do</string>
+    <string name="shipment_history">Shipment History</string>
+    <string name="all">All</string>
+    <string name="completed">Completed</string>
+    <string name="progress">In progress</string>
+    <string name="pending">Pending Order</string>
+    <string name="cancelled">Cancelled</string>
+</resources>
