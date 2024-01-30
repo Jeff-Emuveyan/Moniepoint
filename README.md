@@ -25,3 +25,10 @@ and I grouped the code base into three main modules:
 1) ```app```: This is the container module of the application. Its sole duty is to display all features of the application
 2) ```core```: The core module serves as the base module. It contains code that can be resued across any part of the code base.
 3) ```feature```: The feature module contains all features of the application.
+
+## Something extra! 😁😁
+
+I added an automated UI test using [UiAutomator](https://developer.android.com/training/testing/other-components/ui-automator) to launch and verify that the
+the expected Composables are visbile when the app is launched.
+This automated test can be found here:
+https://github.com/Jeff-Emuveyan/Moniepoint/blob/master/app/src/androidTest/java/com/example/moniepoint/AutomationTest.kt
